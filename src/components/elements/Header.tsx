@@ -11,6 +11,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "./Button";
+import TeacherFormModal from "../modules/Modals/TeacherFormModal";
+import StudentFormModal from "../modules/Modals/StudentFormModal";
 
 // import { logOut } from '../../utils/auth/authLogout';
 
@@ -20,11 +22,24 @@ import Button from "./Button";
 const Header = () => {
   const router = useRouter();
   const [openNav, setOpenNav] = useState(false);
+  const [toggleTeacher, setToggleTeacher] = useState(false);
+  const [toggleStudent, setToggleStudent] = useState(false);
   //   const isLoggedIn = localStorage.getItem("isLogIn");
   //   const navigate = useNavigate();
+  const handleAddTeacher = () => {
+    setToggleTeacher(!toggleTeacher);
+  };
+
+  const handleToggleStudent = () => {
+    setToggleStudent(!toggleStudent);
+  };
+  console.log("toggleTeacher", toggleTeacher);
+
   const isLoggedIn = "true";
+  console.log("isLoggedIn", isLoggedIn);
+
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4 shadow-[0_10px_30px_-28px_rgba(0,0,0,0.3)]">
+    <div className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-2  md:p-4 shadow-[0_10px_30px_-28px_rgba(0,0,0,0.3)]">
       <div className="flex items-center">
         <div
           className="cursor-pointer"
@@ -32,18 +47,14 @@ const Header = () => {
             setOpenNav(!openNav);
           }}
         >
-          <AiOutlineMenu size={30} />
+          <AiOutlineMenu size={25} />
         </div>
-        <h3 className="text-2xl sm:text-2xl lg:text-4xl px-2 font-bold text-[#0F344E]">
+        <h3 className="text-sm sm:text-xl  md:text-2xl xl:text-4xl px-2 font-normal sm:font-medium xl:font-bold text-[#0F344E]">
           Mini LMS
         </h3>
-        {/* <div className='hidden lg:flex items-center bg-gray-200 rounded-full p-1 text-[14px]'>
-          <p className='bg-black text-white rounded-full p-2'>Delivery</p>
-          <p className='p-2'>Pickup</p>
-        </div> */}
       </div>
       {/* search input */}
-      <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]">
+      <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] md:w-[400px] lg:w-[500px]">
         <AiOutlineSearch size={20} />
         <input
           type="text"
@@ -54,14 +65,18 @@ const Header = () => {
       {/* login button */}
       {isLoggedIn === "true" ? (
         <div className="hidden md:hidden lg:flex md:gap-2">
-          <Button icon={BiPen} text="Add Teacher" type="primary" />
-          <Button icon={BiPen} text="Add Student" type="primary" />
-          {/* <button
-            className="bg-[#FF7606]/80 text-white hidden md:flex  items-center gap-2 py-2 rounded-full border-none"
-            onClick={() => logOut(setIsLogIn, navigate)}
-          >
-            <BiLogOut size={25} /> Logout
-          </button> */}
+          <Button
+            icon={BiPen}
+            text="Add Teacher"
+            type="primary"
+            handleClick={handleAddTeacher}
+          />
+          <Button
+            icon={BiPen}
+            text="Add Student"
+            type="primary"
+            handleClick={handleToggleStudent}
+          />
         </div>
       ) : (
         <button className="bg-[#FF7606]/80 text-white hidden md:hidden lg:flex  items-center gap-2 py-2 rounded-full border-none">
@@ -150,6 +165,19 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+
+      {toggleTeacher && (
+        <TeacherFormModal
+          toggleTeacher={toggleTeacher}
+          setToggleTeacher={setToggleTeacher}
+        />
+      )}
+      {toggleStudent && (
+        <StudentFormModal
+          toggleStudent={toggleStudent}
+          setToggleStudent={setToggleStudent}
+        />
+      )}
     </div>
   );
 };

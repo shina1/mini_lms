@@ -6,20 +6,25 @@ interface ButtonProps {
   icon?: IconType;
   text: string;
   type: "primary" | "secondary";
+  handleClick?: ((e: any) => void) | undefined;
 }
 
-const Button: React.FC<ButtonProps> = ({ icon: Icon, text, type }) => {
+const Button: React.FC<ButtonProps> = ({
+  icon: Icon,
+  text,
+  type,
+  handleClick,
+}) => {
   const buttonClasses = classNames(
-    "hidden md:flex items-center gap-2 py-2 px-4 rounded-full border-none text-lg transition duration-300",
+    " items-center border border-[#FF7606] gap-2 py-2 px-4 rounded-full border-none text-lg transition duration-300",
     {
-      "bg-[#FF7606]/80 text-white": type === "primary",
-      "bg-white border border-[#FF7606]/80 text-[#FF7606]/80":
-        type === "secondary",
+      "hidden md:flex bg-[#FF7606]/80 text-white": type === "primary",
+      "flex bg-white  text-[#FF7606]/80": type === "secondary",
     }
   );
 
   return (
-    <button className={buttonClasses}>
+    <button className={buttonClasses} onClick={handleClick}>
       {Icon && <Icon className="inline-block mr-2" size={25} />} {text}
     </button>
   );
