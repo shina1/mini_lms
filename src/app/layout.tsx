@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/elements/Header";
 import "./globals.css";
 import type { Metadata } from "next";

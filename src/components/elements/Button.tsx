@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
     " items-center border border-[#FF7606] gap-2 py-2 px-4 rounded-full border-none text-lg transition duration-300",
     {
       "hidden md:flex bg-[#FF7606]/80 text-white": type === "primary",
-      "flex bg-white  text-[#FF7606]/80": type === "secondary",
+      "flex bg-[#000]  text-[#fff]": type === "secondary",
     }
   );
 

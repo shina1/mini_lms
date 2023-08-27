@@ -39,7 +39,7 @@ const Header = () => {
   console.log("isLoggedIn", isLoggedIn);
 
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-2  md:p-4 shadow-[0_10px_30px_-28px_rgba(0,0,0,0.3)]">
+    <div className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-2  md:py-4 md:px-10 shadow-[0_10px_30px_-28px_rgba(0,0,0,0.3)]">
       <div className="flex items-center">
         <div
           className="cursor-pointer"
