@@ -13,7 +13,7 @@ const StudentForm = () => {
     <FormProvider {...methods}>
       <div className="px-6 py-6 lg:px-8">
         <h3 className="mb-4 text-xl font-medium text-gray-900 ">
-          Add a New Teacher
+          Add a New Student
         </h3>
         <form className="space-y-6" action="#">
           <div>
