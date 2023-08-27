@@ -1,9 +1,10 @@
 import { calculateAge } from "@/Utils/calculateAge";
+import { addDoc, collection } from "firebase/firestore";
 import Button from "@/components/elements/Button";
 import InputComponent from "@/components/elements/InputComponent";
-import { spawn } from "child_process";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { db } from "@/store/config";
 
 type FormState = {
   nationalId: string;
@@ -11,6 +12,10 @@ type FormState = {
   surName: string;
   dob: string;
   studentNo: string;
+};
+
+type formCompProps = {
+  setToggleStudent: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const initialFormState: FormState = {
@@ -21,10 +26,12 @@ const initialFormState: FormState = {
   studentNo: "",
 };
 
-const StudentForm = () => {
+const StudentForm = ({ setToggleStudent }: formCompProps) => {
   const methods = useForm();
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const [validateAgeError, setValidateAgeError] = useState("");
+
+  const studentsCollectionRef = collection(db, "students");
 
   const handleChange = (name: string, value: string) => {
     setFormState((prevState) => ({
@@ -62,10 +69,18 @@ const StudentForm = () => {
     return payload;
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const payload = setPayload();
-    console.log("...submit", payload);
+
+    try {
+      const res = await addDoc(studentsCollectionRef, payload);
+      if (res?.firestore) {
+        setToggleStudent(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <FormProvider {...methods}>

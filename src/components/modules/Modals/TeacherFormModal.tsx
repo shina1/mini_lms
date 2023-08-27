@@ -34,7 +34,7 @@ const TeacherFormModal = ({ setToggleTeacher, toggleTeacher }: compProps) => {
             </svg>
             <span className="sr-only">Close modal</span>
           </button>
-          <TeachersForm />
+          <TeachersForm setToggleTeacher={setToggleTeacher} />
         </div>
       </div>
     </div>
