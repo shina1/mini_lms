@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineCloseCircle,
   AiOutlineMenu,
@@ -7,12 +7,13 @@ import {
 } from "react-icons/ai";
 import { BiPen, BiLogIn, BiLogOut } from "react-icons/bi";
 import { AiOutlineHome } from "react-icons/ai";
-// import { NavLink, useNavigate } from "react-router-dom";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import Button from "./Button";
 import TeacherFormModal from "../modules/Modals/TeacherFormModal";
 import StudentFormModal from "../modules/Modals/StudentFormModal";
+import { useRouter } from "next/router";
 
 // import { logOut } from '../../utils/auth/authLogout';
 
@@ -20,12 +21,17 @@ import StudentFormModal from "../modules/Modals/StudentFormModal";
 //   setIsLogIn: React.Dispatch<React.SetStateAction<boolean>>;
 // };
 const Header = () => {
-  const router = useRouter();
+  //   const router = useRouter();
   const [openNav, setOpenNav] = useState(false);
   const [toggleTeacher, setToggleTeacher] = useState(false);
   const [toggleStudent, setToggleStudent] = useState(false);
-  //   const isLoggedIn = localStorage.getItem("isLogIn");
-  //   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState("false");
+
+  useEffect(() => {
+    const authCheck = localStorage.getItem("isLogIn") || "";
+    setIsLoggedIn(authCheck);
+  });
+
   const handleAddTeacher = () => {
     setToggleTeacher(!toggleTeacher);
   };
@@ -35,7 +41,6 @@ const Header = () => {
   };
   console.log("toggleTeacher", toggleTeacher);
 
-  const isLoggedIn = "true";
   console.log("isLoggedIn", isLoggedIn);
 
   return (
@@ -79,7 +84,7 @@ const Header = () => {
           />
         </div>
       ) : (
-        <button className="bg-[#FF7606]/80 text-white hidden md:hidden lg:flex  items-center gap-2 py-2 rounded-full border-none">
+        <button className="bg-[#FF7606]/80 text-white items-center border border-[#FF7606] gap-[0.5rem] xl:gap-2 p-2 lg:px-4 rounded-full border-none text-sm xl:text-lg transition duration-300">
           <BiLogIn size={24} /> <Link href="/login">Login</Link>
         </button>
       )}

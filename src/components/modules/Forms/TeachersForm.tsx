@@ -1,8 +1,10 @@
 import { calculateAge } from "@/Utils/calculateAge";
+import { addDoc, collection } from "firebase/firestore";
 import Button from "@/components/elements/Button";
 import InputComponent from "@/components/elements/InputComponent";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { db } from "@/store/config";
 
 type Data = {
   title: string;
@@ -35,12 +37,21 @@ const initialFormState: FormState = {
   teacherNo: "",
   salary: "",
 };
+type formCompProps = {
+  setToggleTeacher: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const TeachersForm = () => {
+const TeachersForm = ({ setToggleTeacher }: formCompProps) => {
   const methods = useForm();
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const [selectState, setSelectState] = useState<string>("");
   const [validateAgeError, setValidateAgeError] = useState("");
+
+  // collection from the datABSE
+  //   teachers
+  const teacherCollectionRef = collection(db, "teachers");
+
+  console.log("blogCollectionRef", teacherCollectionRef);
 
   const handleChange = (name: string, value: string) => {
     setFormState((prevState) => ({
@@ -82,35 +93,19 @@ const TeachersForm = () => {
     return payload;
   };
 
-  function saveDataToLocalStorage(newData: Data[]): void {
-    try {
-      const existingData = localStorage.getItem("teacherData");
-
-      const dataToSave = existingData ? JSON.parse(existingData) : [];
-
-      dataToSave.push(...newData);
-
-      // Save the updated data back to localStorage
-      localStorage.setItem("teacherData", JSON.stringify(dataToSave));
-
-      console.log("Data saved successfully:", newData);
-    } catch (error) {
-      throw new Error("Failed to save data to localStorage");
-    }
-  }
-
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const payload = setPayload();
-    console.log("payload", payload);
+
     try {
-      saveDataToLocalStorage(payload);
+      const res = await addDoc(teacherCollectionRef, payload);
+      if (res?.firestore) {
+        setToggleTeacher(false);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  //   console.log("formState", formState);
 
   return (
     <FormProvider {...methods}>
@@ -118,7 +113,11 @@ const TeachersForm = () => {
         <h3 className="mb-4 text-xl font-medium text-gray-900 ">
           Add a New Teacher
         </h3>
-        <form className="space-y-6" action="#">
+        <form
+          className="space-y-6"
+          action="#"
+          onSubmit={(e) => handleSubmit(e)}
+        >
           <div>
             <InputComponent
               name="nationalId"
@@ -216,7 +215,7 @@ const TeachersForm = () => {
               handleChange={handleChange}
             />
           </div>
-          <Button text="Submit" type="secondary" handleClick={handleSubmit} />
+          <Button text="Submit" type="secondary" />
         </form>
       </div>
     </FormProvider>
