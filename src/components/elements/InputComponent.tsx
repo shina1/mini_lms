@@ -13,7 +13,7 @@ type InputProps = {
   handleChange: (name: string, value: string) => void;
 };
 
-const sanitizeInput = (input: string): string => {
+export const sanitizeInput = (input: string): string => {
   const allowedCharacters = /^[a-zA-Z0-9\s.,!?@#$%^&*()\-_=+[\]{}:;"'<>/`~]*$/;
   return input.replace(
     new RegExp(`[^${allowedCharacters.source}]`, "g"),
