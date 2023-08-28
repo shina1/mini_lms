@@ -80,6 +80,7 @@ const TeachersForm = ({ setToggleTeacher }: formCompProps) => {
     const payload = {
       title: selectState,
       nationalId: formState.nationalId,
+      category: "Teachers",
       firstName: formState.firstName,
       surName: formState.surName,
       dob: formState.dob,
