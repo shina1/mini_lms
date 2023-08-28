@@ -7,28 +7,32 @@ export type CardType = {
   icon: any;
   percent: string;
 };
+type compProps = {
+  teacherDatas: any;
+  studentDatas: any;
+};
 
-const CardGridDisp = () => {
+const CardGridDisp = ({ teacherDatas, studentDatas }: compProps) => {
   const CardDetials: CardType[] = [
     {
       id: "1",
       label: "Total No. Teachers",
 
-      value: "200",
+      value: teacherDatas?.length,
       icon: "stock-down",
       percent: "2%",
     },
     {
       id: "2",
       label: "Total No. Profesors",
-      value: "₦100,000",
+      value: 5,
       icon: "up-stock",
       percent: "2%",
     },
     {
       id: "3",
       label: "Total No. Students",
-      value: "300",
+      value: studentDatas?.length,
       icon: "up-stock",
       percent: "2%",
     },

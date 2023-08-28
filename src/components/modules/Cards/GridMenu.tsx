@@ -7,6 +7,8 @@ type menuProps = {
   filtredData: string;
   toggleTeacher: boolean;
   toggleStudent: boolean;
+  setTeacherDatas: any;
+  setStudentDatas: any;
 };
 
 const GridMenu = ({
@@ -14,6 +16,8 @@ const GridMenu = ({
   filtredData,
   toggleTeacher,
   toggleStudent,
+  setTeacherDatas,
+  setStudentDatas,
 }: menuProps) => {
   return (
     <section className="max-w-[1640px] mx-auto px-4 py-12 md:px-10">
@@ -29,6 +33,8 @@ const GridMenu = ({
         filtredData={filtredData}
         toggleTeacher={toggleTeacher}
         toggleStudent={toggleStudent}
+        setTeacherDatas={setTeacherDatas}
+        setStudentDatas={setStudentDatas}
       />
     </section>
   );

@@ -9,12 +9,16 @@ type menuProps = {
   filtredData: string;
   toggleTeacher: boolean;
   toggleStudent: boolean;
+  setTeacherDatas: any;
+  setStudentDatas: any;
 };
 
 const FilteredData = ({
   filtredData,
   toggleTeacher,
   toggleStudent,
+  setTeacherDatas,
+  setStudentDatas,
 }: menuProps) => {
   const [cardData, setCardData] = useState<any>();
 
@@ -31,6 +35,7 @@ const FilteredData = ({
           id: res.id,
         }));
         setCardData(refinedResult);
+        setTeacherDatas(refinedResult);
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +51,7 @@ const FilteredData = ({
           id: res.id,
         }));
         setCardData(refinedResult);
+        setStudentDatas(refinedResult);
       }
     } catch (error) {
       console.log(error);
@@ -63,7 +69,7 @@ const FilteredData = ({
   console.log("cardData", cardData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-4">
-      {cardData !== undefined || cardData.length > 0
+      {cardData !== undefined || cardData?.length > 0
         ? cardData.map(
             (data: {
               category: string;
