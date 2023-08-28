@@ -129,6 +129,7 @@ const Header = ({
                 <li
                   className="text-xl py-4 flex"
                   onClick={() => {
+                    setToggleTeacher(!toggleTeacher);
                     setOpenNav(!openNav);
                   }}
                 >
@@ -138,6 +139,7 @@ const Header = ({
                 <li
                   className="text-xl py-4 flex"
                   onClick={() => {
+                    setToggleStudent(!toggleStudent);
                     setOpenNav(!openNav);
                   }}
                 >
@@ -148,6 +150,7 @@ const Header = ({
                   className="text-xl py-4 flex cursor-pointer"
                   onClick={() => {
                     // logOut(setIsLogIn, navigate);
+
                     setOpenNav(!openNav);
                   }}
                 >
