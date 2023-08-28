@@ -5,9 +5,16 @@ import FilteredData from "./FilteredData";
 type menuProps = {
   setFilteredData: React.Dispatch<React.SetStateAction<string>>;
   filtredData: string;
+  toggleTeacher: boolean;
+  toggleStudent: boolean;
 };
 
-const GridMenu = ({ setFilteredData, filtredData }: menuProps) => {
+const GridMenu = ({
+  setFilteredData,
+  filtredData,
+  toggleTeacher,
+  toggleStudent,
+}: menuProps) => {
   return (
     <section className="max-w-[1640px] mx-auto px-4 py-12 md:px-10">
       <h2 className="text-orange-600 font-bold text-4xl text-center">
@@ -18,7 +25,11 @@ const GridMenu = ({ setFilteredData, filtredData }: menuProps) => {
         setFilteredData={setFilteredData}
         filtredData={filtredData}
       />
-      <FilteredData filtredData={filtredData} />
+      <FilteredData
+        filtredData={filtredData}
+        toggleTeacher={toggleTeacher}
+        toggleStudent={toggleStudent}
+      />
     </section>
   );
 };

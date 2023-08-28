@@ -20,11 +20,13 @@ import { useRouter } from "next/router";
 // type headerPrps = {
 //   setIsLogIn: React.Dispatch<React.SetStateAction<boolean>>;
 // };
-const Header = () => {
-  //   const router = useRouter();
+const Header = ({
+  toggleTeacher,
+  setToggleTeacher,
+  toggleStudent,
+  setToggleStudent,
+}: any) => {
   const [openNav, setOpenNav] = useState(false);
-  const [toggleTeacher, setToggleTeacher] = useState(false);
-  const [toggleStudent, setToggleStudent] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState("false");
 
   useEffect(() => {
@@ -39,9 +41,6 @@ const Header = () => {
   const handleToggleStudent = () => {
     setToggleStudent(!toggleStudent);
   };
-  console.log("toggleTeacher", toggleTeacher);
-
-  console.log("isLoggedIn", isLoggedIn);
 
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between items-center py-4 px-2  md:py-4 md:px-10 shadow-[0_10px_30px_-28px_rgba(0,0,0,0.3)]">

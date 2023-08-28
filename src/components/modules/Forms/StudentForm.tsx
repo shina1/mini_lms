@@ -60,6 +60,7 @@ const StudentForm = ({ setToggleStudent }: formCompProps) => {
     const payload = {
       nationalId: formState.nationalId,
       firstName: formState.firstName,
+      category: "Students",
       surName: formState.surName,
       dob: formState.dob,
       studentNo: formState.studentNo,
